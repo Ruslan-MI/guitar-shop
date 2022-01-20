@@ -1,0 +1,133 @@
+.header {
+  overflow-x: hidden;
+  background-color: $header-background;
+}
+
+.header__nav {
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 16px;
+}
+
+.header__logo {
+  margin: 0;
+  margin-right: 114px;
+}
+
+.header__main-nav-list,
+.header__user-nav-list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header__main-nav-list {
+  width: 550px;
+  margin: 15px auto 15px -40px;
+}
+
+.header__main-nav-item {
+  margin: 10px 0 10px 40px;
+}
+
+.header__main-nav-link {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.078em;
+  color: inherit;
+
+  &:hover,
+  &:focus {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}
+
+.header__user-nav-list {
+  margin: 14px 10px 14px -30px;
+  width: 155px;
+  justify-content: flex-end;
+}
+
+.header__user-nav-item {
+  margin: 10px 0 10px 30px;
+}
+
+.header__user-nav-link {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+
+  &--basket {
+    width: 24px;
+  }
+
+  &::before {
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    transform: translate(-50%, -42%);
+  }
+
+  &--location::before {
+    height: 17px;
+    background-image: url(./img/location-icon.svg);
+  }
+
+  &--search::before {
+    background-image: url(./img/search-icon.svg);
+  }
+
+  &--basket::before {
+    background-image: url(./img/basket-icon.svg);
+    left: 0;
+    transform: translate(1px, -50%);
+  }
+
+  &:hover::before,
+  &:focus::before {
+    opacity: 0.7;
+  }
+
+  &:active::before {
+    opacity: 0.3;
+  }
+}
+
+.header__quantity-items-in-basket {
+  font-size: 10px;
+  line-height: 12px;
+  color: $basket-quantity;
+  position: absolute;
+  top: 1px;
+  right: 0;
+}
+
+.header__decorative-wrapper {
+  height: 272px;
+  background-color: $general-white;
+
+  &::before {
+    content: "";
+    height: 84px;
+    background-repeat: repeat;
+    bottom: 171px;
+  }
+}
+
+.header__decorative-guitar {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-35.2%);
+}
