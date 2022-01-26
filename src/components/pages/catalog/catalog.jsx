@@ -4,9 +4,8 @@ import Header from "../../header/header";
 import Breadcrumbs from "../../breadcrumbs/breadcrumbs";
 import Filter from "./filter/filter";
 import Sorting from "./sorting/sorting";
-import Footer from "../../footer/footer";
-
 import CatalogProducts from "./catalog-products/catalog-products";
+import Footer from "../../footer/footer";
 
 const breadcrumbsLinks = [
   {

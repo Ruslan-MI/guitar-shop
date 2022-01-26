@@ -1,9 +1,11 @@
 import React from "react";
 
-import Catalog from "../pages/catalog/catalog";
+// import Catalog from "../pages/catalog/catalog";
+import Basket from "../pages/basket/basket";
 
 const App = () => (
-  <Catalog />
+  // <Catalog />
+  <Basket />
 );
 
 export default App;

@@ -32,14 +32,14 @@ const CatalogCard = ({
       <p className="catalog-card__popularity">{popularity}</p>
     </div>
     <div className="catalog-card__content-wrapper catalog-card__content-wrapper--image">
-      <img className="catalog-card__image" src={`img/${type}.png`} alt="Изображение товара" width="68" height="190" />
+      <img className="catalog-card__image" src={`img/catalog/${type}.png`} alt="Изображение товара" width="68" height="190" />
     </div>
     <ul className="catalog-card__links-list">
       <li className="catalog-card__links-item">
-        <a className="catalog-card__link catalog-card__link--more" href="#">Подробнее</a>
+        <a className="catalog-card__link catalog-card__link--more grey-button" href="#">Подробнее</a>
       </li>
       <li className="catalog-card__links-item">
-        <a className="catalog-card__link catalog-card__link--buy" href="#" onClick={() => id} >Купить</a>
+        <a className="catalog-card__link catalog-card__link--buy orange-button" href="#" onClick={() => id} >Купить</a>
       </li>
     </ul>
   </article>

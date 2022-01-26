@@ -75,43 +75,19 @@
 .catalog-card__link {
   display: block;
   height: 23px;
-  color: $general-white;
   font-size: 12px;
-  font-weight: 700;
   letter-spacing: 0.02em;
-  text-align: center;
-  border-radius: 2px;
   padding-top: 6px;
 
   &--more {
     width: 89px;
-    background-color: $checkbox-active;
-  }
-
-  &--more:hover,
-  &--more:focus {
-    background-color: $price-dash;
-  }
-
-  &--more:active {
-    background-color: $input-border;
   }
 
   &--buy {
     width: 87px;
-    background-color: $buy-link-background;
     padding-left: 15px;
     background-image: url(./img/cart.svg);
     background-repeat: no-repeat;
     background-position: 11px center;
-  }
-
-  &--buy:hover,
-  &--buy:focus {
-    background-color: $buy-link-hover-background;
-  }
-
-  &--buy:active {
-    background-color: $buy-link-active-background;
   }
 }

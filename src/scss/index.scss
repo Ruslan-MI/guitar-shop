@@ -5,6 +5,8 @@
 @import "./blocks/wrapper.scss";
 @import "./blocks/page.scss";
 @import "./blocks/main.scss";
+@import "./blocks/grey-button.scss";
+@import "./blocks/orange-button.scss";
 @import "../components/header/header.scss";
 @import "../components/decorative-guitar/decorative-guitar.scss";
 @import "../components/footer/footer.scss";
@@ -20,3 +22,7 @@
 @import "../components/pages/catalog/sorting/sorting.scss";
 @import "../components/pages/catalog/catalog-products/catalog-products.scss";
 @import "../components/pages/catalog/catalog-products/catalog-card/catalog-card.scss";
+@import "../components/pages/basket/basket.scss";
+@import "../components/pages/basket/basket-products/basket-products.scss";
+@import "../components/pages/basket/basket-products/basket-card/basket-card.scss";
+@import "../components/pages/basket/promo-code/promo-code.scss";
