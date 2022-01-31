@@ -45,6 +45,19 @@
   left: 41px;
 }
 
+.footer__logo-link {
+  color: inherit;
+
+  &:is([href]):hover,
+  &:is([href]):focus {
+    opacity: 0.7;
+  }
+
+  &:is([href]):active {
+    opacity: 0.3;
+  }
+}
+
 .footer__block-heading {
   font-size: 14px;
   font-weight: 400;

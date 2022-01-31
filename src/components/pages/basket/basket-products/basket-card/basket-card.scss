@@ -5,6 +5,10 @@
 }
 
 .basket-card__content-wrapper {
+  &--heading-article-specifications {
+    width: 300px;
+  }
+
   &--image {
     order: -1;
     margin-right: 68px;
@@ -42,12 +46,13 @@
 .basket-card__price {
   font-size: 20px;
   letter-spacing: 0.05em;
+  width: 120px;
 }
 
 .basket-card__quantity-wrapper {
   display: flex;
   position: relative;
-  margin: 17px 2px auto 0;
+  margin: 17px 0 auto 6px;
 }
 
 .basket-card__change-quantity-button {
@@ -112,28 +117,12 @@
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.05em;
+  width: 120px;
+  text-align: right;
 }
 
 .basket-card__remove-from-basket-button {
   position: absolute;
-  padding: 0;
-  border: none;
-  width: 18px;
-  height: 18px;
   top: 20px;
   left: 1px;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.77 11.835 6 7.058l-4.77 4.777L.165 10.77 4.943 6 .165 1.23 1.23.165 6 4.943l4.77-4.77 1.058 1.057L7.058 6l4.77 4.77-1.058 1.065Z' fill='%239F9E9E'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    outline: auto;
-  }
-
-  &:active {
-    opacity: 0.3;
-  }
 }

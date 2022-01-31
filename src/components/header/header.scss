@@ -17,6 +17,19 @@
   margin-right: 114px;
 }
 
+.header__logo-link {
+  color: inherit;
+
+  &:is([href]):hover,
+  &:is([href]):focus {
+    opacity: 0.7;
+  }
+
+  &:is([href]):active {
+    opacity: 0.3;
+  }
+}
+
 .header__main-nav-list,
 .header__user-nav-list {
   padding: 0;
@@ -97,12 +110,12 @@
     transform: translate(1px, -50%);
   }
 
-  &:hover::before,
-  &:focus::before {
+  &:is([href]):hover::before,
+  &:is([href]):focus::before {
     opacity: 0.7;
   }
 
-  &:active::before {
+  &:is([href]):active::before {
     opacity: 0.3;
   }
 }
@@ -113,7 +126,7 @@
   color: $basket-quantity;
   position: absolute;
   top: 1px;
-  right: 0;
+  left: 18px;
 }
 
 .header__decorative-wrapper {

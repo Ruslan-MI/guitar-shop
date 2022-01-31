@@ -7,7 +7,7 @@
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: min-content min-content min-content;
   column-gap: 20px;
   row-gap: 30px;
   transform: translateX(2px);
@@ -32,8 +32,10 @@
   color: inherit;
   padding-top: 5px;
   margin-left: 10px;
+  user-select: none;
 
-  &--further {
+  &--further,
+  &--back {
     width: 80px;
     margin-left: 14px;
     letter-spacing: 0.06em;

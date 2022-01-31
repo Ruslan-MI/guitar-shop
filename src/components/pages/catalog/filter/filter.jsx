@@ -11,7 +11,6 @@ const Filter = () => (
       <FilterPrice />
       <FilterType />
       <FilterStrings />
-      <button className="filter__form-submit-button" type="submit">Показать</button>
     </form>
   </section>
 );

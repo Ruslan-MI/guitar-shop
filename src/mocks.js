@@ -1,3 +1,6 @@
+const MAX_RATING = 5;
+const RATING_STEP = 0.5;
+
 const mockGuitars = [
   {
     id: 1,
@@ -301,4 +304,7 @@ const mockGuitars = [
   },
 ];
 
-export const getMockGuitars = () => mockGuitars;
+export const getMockGuitars = () => mockGuitars.map((item) => ({
+  ...item,
+  rating: Math.round(Math.random() * (MAX_RATING / RATING_STEP)) * RATING_STEP,
+}));

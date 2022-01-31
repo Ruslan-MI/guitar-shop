@@ -1,50 +1,70 @@
 import React from "react";
+import {
+  useSelector,
+  useDispatch,
+} from "react-redux";
 
-const checkboxes = [
-  {
-    name: `four-strings`,
-    label: `4`,
-    checked: true,
-    disabled: false,
-  },
-  {
-    name: `six-strings`,
-    label: `6`,
-    checked: true,
-    disabled: false,
-  },
-  {
-    name: `seven-strings`,
-    label: `7`,
-    checked: false,
-    disabled: false,
-  },
-  {
-    name: `twelve-strings`,
-    label: `12`,
-    checked: false,
-    disabled: true,
-  },
+import {
+  StoreNameSpace,
+  StringsInGuitarType,
+} from "../../../../../const";
+import {
+  changeStringsFilter,
+} from "../../../../../store/actions/catalog";
+import {
+  filterStrings,
+} from "../../../../../utils";
+
+const strings = [
+  ...new Set(Object.values(StringsInGuitarType).reduce((a, b) => a.concat(b))),
 ];
 
-const FilterStrings = () => (
-  <fieldset className="filter__block filter-strings">
-    <h3 className="filter__block-heading">Количество струн</h3>
-    <ul className="filter-strings__list filter__checkbox-list">
-      {checkboxes.map(({
-        name,
-        label,
-        checked,
-        disabled,
-      }) => (
-        <li key={name} className="filter-strings__item filter__checkbox-item">
-          <input className="filter-strings__checkbox filter__checkbox-input visually-hidden" type="checkbox" id={name} name={name}
-            defaultChecked={checked} disabled={disabled} />
-          <label className="filter-strings__label filter__checkbox-label" htmlFor={name}>{label}</label>
-        </li>
-      ))}
-    </ul>
-  </fieldset>
-);
+const FilterStrings = () => {
+  const {
+    guitarTypeFilter,
+    guitarStringsFilter,
+  } = useSelector((globalState) => ({
+    ...globalState[StoreNameSpace.CATALOG],
+  }));
+
+  const availableStrings = guitarTypeFilter.length ? filterStrings(strings, guitarTypeFilter) : strings;
+
+  const dispatch = useDispatch();
+
+  const handleStringsInputChange = (evt) => {
+    const {
+      id,
+      checked,
+    } = evt.target;
+
+    dispatch(changeStringsFilter({
+      strings: Number(id),
+      isAdd: checked,
+    }));
+  };
+
+  return (
+    <fieldset className="filter__block filter-strings">
+      <h3 className="filter__block-heading">Количество струн</h3>
+      <ul className="filter-strings__list filter__checkbox-list">
+        {strings.map((item) => ({
+          item,
+          checked: guitarStringsFilter.includes(item),
+          disabled: !availableStrings.includes(item),
+        })).map(({
+          item,
+          checked,
+          disabled,
+        }) => (
+          <li key={item} className="filter-strings__item filter__checkbox-item">
+            <input className="filter-strings__checkbox filter__checkbox-input visually-hidden" type="checkbox" id={item} name={item}
+              checked={checked} disabled={disabled} onChange={handleStringsInputChange} />
+            <label className="filter-strings__label filter__checkbox-label" htmlFor={item}>{item}</label>
+          </li>
+        ))}
+      </ul>
+    </fieldset>
+  );
+};
 
 export default FilterStrings;

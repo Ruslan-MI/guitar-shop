@@ -85,29 +85,3 @@
 .filter__checkbox-input:disabled + .filter__checkbox-label {
   opacity: 0.2;
 }
-
-.filter__form-submit-button {
-  width: 120px;
-  height: 30px;
-  margin-top: 23px;
-  padding: 0;
-  padding-top: 2px;
-  border: none;
-  border-radius: 2px;
-  background-color: $checkbox-active;
-  color: $general-white;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    background-color: $price-dash;
-  }
-
-  &:active {
-    background-color: $input-border;
-  }
-}

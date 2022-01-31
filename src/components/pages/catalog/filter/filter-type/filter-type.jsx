@@ -1,40 +1,66 @@
 import React from "react";
+import {
+  useSelector,
+  useDispatch,
+} from "react-redux";
 
-const checkboxes = [
-  {
-    name: `acoustic`,
-    label: `Акустические гитары`,
-    checked: false,
-  },
-  {
-    name: `electric`,
-    label: `Электрогитары`,
-    checked: true,
-  },
-  {
-    name: `ukulele`,
-    label: `Укулеле`,
-    checked: true,
-  },
-];
+import {
+  changeGuitarTypeFilter,
+} from "../../../../../store/actions/catalog";
+import {
+  GuitarType,
+  StoreNameSpace,
+} from "../../../../../const";
 
-const FilterType = () => (
-  <fieldset className="filter__block filter-type">
-    <h3 className="filter__block-heading">Тип гитар</h3>
-    <ul className="filter-type__list filter__checkbox-list">
-      {checkboxes.map(({
-        name,
-        label,
-        checked,
-      }) => (
-        <li key={name} className="filter-type__item filter__checkbox-item">
-          <input className="filter-type__checkbox filter__checkbox-input visually-hidden" type="checkbox" id={name} name={name}
-            defaultChecked={checked} />
-          <label className="filter-type__label filter__checkbox-label" htmlFor={name}>{label}</label>
-        </li>
-      ))}
-    </ul>
-  </fieldset>
-);
+const guitarTypeCyrillicMap = {
+  [GuitarType.ACOUSTIC]: `Акустические гитары`,
+  [GuitarType.ELECTRIC]: `Электрогитары`,
+  [GuitarType.UKULELE]: `Укулеле`,
+};
+
+const FilterType = () => {
+  const {
+    guitarTypeFilter,
+  } = useSelector((globalState) => ({
+    ...globalState[StoreNameSpace.CATALOG],
+  }));
+
+  const dispatch = useDispatch();
+
+  const handleTypeInputChange = (evt) => {
+    const {
+      id,
+      checked,
+    } = evt.target;
+
+    dispatch(changeGuitarTypeFilter({
+      guitarType: id,
+      isAdd: checked,
+    }));
+  };
+
+  return (
+    <fieldset className="filter__block filter-type">
+      <h3 className="filter__block-heading">Тип гитар</h3>
+      <ul className="filter-type__list filter__checkbox-list">
+        {Object.values(GuitarType).map((item) => ({
+          guitarType: item,
+          checked: guitarTypeFilter.includes(item),
+        })).map(({
+          guitarType,
+          checked,
+        }) => (
+          <li key={guitarType} className="filter-type__item filter__checkbox-item">
+            <input className="filter-type__checkbox filter__checkbox-input visually-hidden" type="checkbox"
+              id={guitarType} name={guitarType} checked={checked} onChange={handleTypeInputChange} />
+            <label className="filter-type__label filter__checkbox-label" htmlFor={guitarType}>
+              {guitarTypeCyrillicMap[guitarType]}
+            </label>
+          </li>
+        ))}
+      </ul>
+    </fieldset>
+  );
+};
 
 export default FilterType;

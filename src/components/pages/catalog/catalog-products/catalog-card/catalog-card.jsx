@@ -5,8 +5,6 @@ import {
   formatPrice,
 } from "../../../../../utils";
 
-const MAX_RATING = 5;
-const RATING_STEP = 0.5;
 const STAR_WIDTH = 20;
 
 const CatalogCard = ({
@@ -16,6 +14,7 @@ const CatalogCard = ({
     type,
     popularity,
     price,
+    rating,
   },
 }) => (
   <article className="catalog__product-card catalog-card">
@@ -26,7 +25,7 @@ const CatalogCard = ({
     <div className="catalog-card__content-wrapper catalog-card__content-wrapper--rating-and-popularity">
       <div className="catalog-card__rating-stars">
         <div className="catalog-card__active-rating-stars" style={{
-          width: `${Math.round(Math.random() * (MAX_RATING / RATING_STEP)) * RATING_STEP * STAR_WIDTH}%`,
+          width: `${rating * STAR_WIDTH}%`,
         }} />
       </div>
       <p className="catalog-card__popularity">{popularity}</p>
@@ -52,6 +51,7 @@ CatalogCard.propTypes = {
     type: PropTypes.string.isRequired,
     popularity: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
   }).isRequired,
 };
 
