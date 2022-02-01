@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useEffect,
+} from "react";
 import {
   useSelector,
   useDispatch,
@@ -14,6 +16,7 @@ import {
   getMaxPageNumber,
 } from "../../../../store/selectors";
 import {
+  INITIAL_PAGE_NUMBER,
   StoreNameSpace,
 } from "../../../../const";
 
@@ -57,6 +60,10 @@ const CatalogProducts = () => {
     }
   };
 
+  useEffect(() =>
+    currentPageNumber > maxPageNumber &&
+    dispatch(changeCatalogPage(INITIAL_PAGE_NUMBER)));
+
   return (
     <section className="catalog__products catalog-products">
       <h2 className="visually-hidden">Перечень товаров</h2>
@@ -81,7 +88,7 @@ const CatalogProducts = () => {
           </li>
         ))}
       </ul>
-      <ul className="catalog-products__pagination-list" onClick={handlePaginationListClick}>
+      <ul className={`catalog-products__pagination-list ${maxPageNumber === MIN_PAGE_NUMBER ? `visually-hidden` : ``}`} onClick={handlePaginationListClick}>
         {isShowFirstPageLink && (
           <>
             <li className="catalog-products__pagination-item">

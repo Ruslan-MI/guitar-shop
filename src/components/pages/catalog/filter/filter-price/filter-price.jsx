@@ -15,6 +15,7 @@ import {
   getPriceRange,
 } from "../../../../../store/selectors";
 import {
+  formatPrice,
   getValueInRange,
   removeNonDigits,
 } from "../../../../../utils";
@@ -75,9 +76,11 @@ const FilterPrice = () => {
         <p className="filter-price__paragraph">
           <label className="visually-hidden" htmlFor="min-price">От</label>
           <span className="filter-price__input-wrapper">
-            <span className="filter-price__input-substrate"></span>
+            <span className="filter-price__input-substrate">
+              {minPriceFilter !== null ? formatPrice(minPriceFilter) : ``}
+            </span>
             <input className="filter-price__input filter-price__input--min-price" type="number"
-              id="min-price" name="min-price" placeholder={minPriceRange}
+              id="min-price" name="min-price" placeholder={formatPrice(minPriceRange)}
               value={minPriceFilter !== null ? minPriceFilter.toString() : ``}
               onChange={handleMinPriceInputChange} onBlur={handleMinPriceInputBlur} />
           </span>
@@ -85,9 +88,11 @@ const FilterPrice = () => {
         <p className="filter-price__paragraph">
           <label className="visually-hidden" htmlFor="max-price">До</label>
           <span className="filter-price__input-wrapper">
-            <span className="filter-price__input-substrate"></span>
+            <span className="filter-price__input-substrate">
+              {maxPriceFilter !== null ? formatPrice(maxPriceFilter) : ``}
+            </span>
             <input className="filter-price__input filter-price__input--max-price" type="number"
-              id="max-price" name="max-price" placeholder={maxPriceRange}
+              id="max-price" name="max-price" placeholder={formatPrice(maxPriceRange)}
               value={maxPriceFilter !== null ? maxPriceFilter.toString() : ``}
               onChange={handleMaxPriceInputChange} onBlur={handleMaxPriceInputBlur} />
           </span>

@@ -5,29 +5,18 @@ import {
 } from "react-redux";
 
 import {
-  StoreNameSpace,
-  StringsInGuitarType,
-} from "../../../../../const";
-import {
   changeStringsFilter,
 } from "../../../../../store/actions/catalog";
 import {
-  filterStrings,
-} from "../../../../../utils";
-
-const strings = [
-  ...new Set(Object.values(StringsInGuitarType).reduce((a, b) => a.concat(b))),
-];
+  getStringsFilterParameters,
+} from "../../../../../store/selectors";
 
 const FilterStrings = () => {
   const {
-    guitarTypeFilter,
-    guitarStringsFilter,
+    stringsFilterParameters,
   } = useSelector((globalState) => ({
-    ...globalState[StoreNameSpace.CATALOG],
+    ...getStringsFilterParameters(globalState),
   }));
-
-  const availableStrings = guitarTypeFilter.length ? filterStrings(strings, guitarTypeFilter) : strings;
 
   const dispatch = useDispatch();
 
@@ -47,11 +36,7 @@ const FilterStrings = () => {
     <fieldset className="filter__block filter-strings">
       <h3 className="filter__block-heading">Количество струн</h3>
       <ul className="filter-strings__list filter__checkbox-list">
-        {strings.map((item) => ({
-          item,
-          checked: guitarStringsFilter.includes(item),
-          disabled: !availableStrings.includes(item),
-        })).map(({
+        {stringsFilterParameters.map(({
           item,
           checked,
           disabled,

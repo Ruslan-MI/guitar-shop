@@ -20,6 +20,22 @@
   }
 }
 
+.filter-price__input-wrapper {
+  position: relative;
+}
+
+.filter-price__input-substrate {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: -1;
+  border-radius: 2px;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+}
+
 .filter-price__input {
   width: 84px;
   height: 28px;
@@ -30,9 +46,16 @@
   font-size: 14px;
   letter-spacing: 0.03em;
   appearance: textfield;
+  color: transparent;
+  background-color: transparent;
 
   &::placeholder {
     opacity: 0.7;
+  }
+
+  &:focus {
+    color: inherit;
+    background-color: $general-white;
   }
 
   &::-webkit-inner-spin-button,

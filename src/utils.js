@@ -60,7 +60,7 @@ export const getValueInRange = (value, minValue, maxValue) => {
   return value;
 };
 
-export const filterStrings = (strings, types) =>
-  strings.filter((string) =>
-    types.some((type) =>
-      StringsInGuitarType[type].includes(string)));
+export const filterStrings = (stringsArr, typesArr) =>
+  stringsArr.filter((stringsItem) =>
+    typesArr.some((typesItem) =>
+      StringsInGuitarType[typesItem].includes(stringsItem)));

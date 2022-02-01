@@ -8,8 +8,10 @@ import {
   changeGuitarTypeFilter,
 } from "../../../../../store/actions/catalog";
 import {
+  getGuitarTypeFilterParameters,
+} from "../../../../../store/selectors";
+import {
   GuitarType,
-  StoreNameSpace,
 } from "../../../../../const";
 
 const guitarTypeCyrillicMap = {
@@ -20,9 +22,9 @@ const guitarTypeCyrillicMap = {
 
 const FilterType = () => {
   const {
-    guitarTypeFilter,
+    guitarTypeFilterParameters,
   } = useSelector((globalState) => ({
-    ...globalState[StoreNameSpace.CATALOG],
+    ...getGuitarTypeFilterParameters(globalState),
   }));
 
   const dispatch = useDispatch();
@@ -43,10 +45,7 @@ const FilterType = () => {
     <fieldset className="filter__block filter-type">
       <h3 className="filter__block-heading">Тип гитар</h3>
       <ul className="filter-type__list filter__checkbox-list">
-        {Object.values(GuitarType).map((item) => ({
-          guitarType: item,
-          checked: guitarTypeFilter.includes(item),
-        })).map(({
+        {guitarTypeFilterParameters.map(({
           guitarType,
           checked,
         }) => (

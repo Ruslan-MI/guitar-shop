@@ -12,14 +12,13 @@ import {
   changeStringsFilter,
 } from "../actions/catalog";
 import {
+  INITIAL_PAGE_NUMBER,
   SortDirection,
   SortType,
 } from "../../const";
 import {
   filterStrings,
 } from "../../utils";
-
-const INITIAL_PAGE_NUMBER = 1;
 
 const initialState = {
   currentPageNumber: INITIAL_PAGE_NUMBER,

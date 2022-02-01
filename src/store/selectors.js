@@ -3,14 +3,21 @@ import {
 } from "@reduxjs/toolkit";
 
 import {
+  GuitarType,
   StoreNameSpace,
+  StringsInGuitarType,
 } from "../const";
 import {
+  filterStrings,
   getSortFunction,
   getValueInRange,
 } from "../utils";
 
 const MAX_PRODUCTS_QUANTITY_IN_PAGE = 9;
+
+const stringsArray = [
+  ...new Set(Object.values(StringsInGuitarType).reduce((a, b) => a.concat(b))),
+];
 
 const getCurrentPageNumber = (state) => state[StoreNameSpace.CATALOG].currentPageNumber;
 const getProducts = (state) => state[StoreNameSpace.DATA].products;
@@ -30,12 +37,12 @@ const getCurrentProducts = createSelector([
   getGuitarTypeFilter,
   getGuitarStringsFilter,
 ], (products, currentSortType, currentSortDirection, minPriceFilter, maxPriceFilter, guitarTypeFilter, guitarStringsFilter) =>
-  products.slice().filter(({
+  products.filter(({
     price,
     type,
     strings,
   }) =>
-    getValueInRange(price, minPriceFilter, maxPriceFilter) === price &&
+    (getValueInRange(price, minPriceFilter, maxPriceFilter) === price) &&
     (guitarTypeFilter.length ? guitarTypeFilter.includes(type) : true) &&
     (guitarStringsFilter.length ? guitarStringsFilter.includes(strings) : true))
     .sort(getSortFunction(currentSortType, currentSortDirection)));
@@ -55,13 +62,9 @@ export const getProductsForPage = createSelector([
 
 export const getMaxPageNumber = createSelector([
   getCurrentProducts,
-], (products) => {
-  const maxPageNumber = Math.ceil(products.length / MAX_PRODUCTS_QUANTITY_IN_PAGE);
-
-  return {
-    maxPageNumber,
-  };
-});
+], (products) => ({
+  maxPageNumber: Math.ceil(products.length / MAX_PRODUCTS_QUANTITY_IN_PAGE),
+}));
 
 export const getPriceRange = createSelector([
   getProducts,
@@ -75,5 +78,33 @@ export const getPriceRange = createSelector([
       min: minPrice,
       max: maxPrice,
     },
+  };
+});
+
+export const getGuitarTypeFilterParameters = createSelector([
+  getGuitarTypeFilter,
+], (guitarTypeFilter) => ({
+  guitarTypeFilterParameters: Object.values(GuitarType).map((item) => ({
+    guitarType: item,
+    checked: guitarTypeFilter.includes(item),
+  })),
+}));
+
+export const getStringsFilterParameters = createSelector([
+  getGuitarTypeFilter,
+  getGuitarStringsFilter,
+], (guitarTypeFilter, guitarStringsFilter) => {
+  const availableStrings = guitarTypeFilter.length ?
+    filterStrings(stringsArray, guitarTypeFilter) :
+    stringsArray;
+
+  const stringsFilterParameters = stringsArray.map((item) => ({
+    item,
+    checked: guitarStringsFilter.includes(item),
+    disabled: !availableStrings.includes(item),
+  }));
+
+  return {
+    stringsFilterParameters,
   };
 });
