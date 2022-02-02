@@ -10,7 +10,7 @@ import {
 import {
   changeMaxPriceFilter,
   changeMinPriceFilter,
-} from "../../../../../store/actions/catalog";
+} from "../../../../../store/actions/page";
 import {
   getPriceRange,
 } from "../../../../../store/selectors";
@@ -29,7 +29,7 @@ const FilterPrice = () => {
       max: maxPriceRange,
     },
   } = useSelector((globalState) => ({
-    ...globalState[StoreNameSpace.CATALOG],
+    ...globalState[StoreNameSpace.PAGE],
     ...getPriceRange(globalState),
   }));
 
@@ -39,6 +39,12 @@ const FilterPrice = () => {
     const value = removeNonDigits(evt.target.value);
 
     if (value.length > `${maxPriceRange}`.length) {
+      return;
+    }
+
+    if (!value) {
+      dispatch(changeMinPriceFilter(null));
+
       return;
     }
 
@@ -56,6 +62,12 @@ const FilterPrice = () => {
     const value = removeNonDigits(evt.target.value);
 
     if (value.length > `${maxPriceRange}`.length) {
+      return;
+    }
+
+    if (!value) {
+      dispatch(changeMaxPriceFilter(null));
+
       return;
     }
 

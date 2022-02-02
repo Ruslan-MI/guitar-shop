@@ -21,6 +21,12 @@
     justify-content: space-between;
     width: 427px;
   }
+
+  &--remove-from-basket-link {
+    position: absolute;
+    top: 20px;
+    left: 1px;
+  }
 }
 
 .basket-card__heading {
@@ -121,8 +127,6 @@
   text-align: right;
 }
 
-.basket-card__remove-from-basket-button {
-  position: absolute;
-  top: 20px;
-  left: 1px;
+.basket-card__remove-from-basket-link {
+  display: block;
 }

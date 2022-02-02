@@ -7,7 +7,7 @@ import {
 import {
   changeSortDirection,
   changeSortType,
-} from "../../../../store/actions/catalog";
+} from "../../../../store/actions/page";
 import {
   SortDirection,
   SortType,
@@ -29,7 +29,7 @@ const Sorting = () => {
     currentSortType,
     currentSortDirection,
   } = useSelector((globalState) => ({
-    ...globalState[StoreNameSpace.CATALOG],
+    ...globalState[StoreNameSpace.PAGE],
   }));
 
   const dispatch = useDispatch();

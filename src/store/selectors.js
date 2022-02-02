@@ -4,6 +4,8 @@ import {
 
 import {
   GuitarType,
+  PRODUCTS_ON_PAGE_MAX_QUANTITY,
+  PromoCodeAction,
   StoreNameSpace,
   StringsInGuitarType,
 } from "../const";
@@ -13,20 +15,21 @@ import {
   getValueInRange,
 } from "../utils";
 
-const MAX_PRODUCTS_QUANTITY_IN_PAGE = 9;
-
 const stringsArray = [
-  ...new Set(Object.values(StringsInGuitarType).reduce((a, b) => a.concat(b))),
+  ...new Set(Object.values(StringsInGuitarType).reduce((a, b) => a.concat(b)).sort((a, b) => a - b)),
 ];
 
-const getCurrentPageNumber = (state) => state[StoreNameSpace.CATALOG].currentPageNumber;
 const getProducts = (state) => state[StoreNameSpace.DATA].products;
-const getCurrentSortType = (state) => state[StoreNameSpace.CATALOG].currentSortType;
-const getCurrentSortDirection = (state) => state[StoreNameSpace.CATALOG].currentSortDirection;
-const getMinPriceFilter = (state) => state[StoreNameSpace.CATALOG].minPriceFilter;
-const getMaxPriceFilter = (state) => state[StoreNameSpace.CATALOG].maxPriceFilter;
-const getGuitarTypeFilter = (state) => state[StoreNameSpace.CATALOG].guitarTypeFilter;
-const getGuitarStringsFilter = (state) => state[StoreNameSpace.CATALOG].guitarStringsFilter;
+const getProductsInBasket = (state) => state[StoreNameSpace.DATA].productsInBasket;
+const getPromoCode = (state) => state[StoreNameSpace.DATA].promoCode;
+const getCurrentPageNumber = (state) => state[StoreNameSpace.PAGE].currentPageNumber;
+const getCurrentSortType = (state) => state[StoreNameSpace.PAGE].currentSortType;
+const getCurrentSortDirection = (state) => state[StoreNameSpace.PAGE].currentSortDirection;
+const getMinPriceFilter = (state) => state[StoreNameSpace.PAGE].minPriceFilter;
+const getMaxPriceFilter = (state) => state[StoreNameSpace.PAGE].maxPriceFilter;
+const getGuitarTypeFilter = (state) => state[StoreNameSpace.PAGE].guitarTypeFilter;
+const getGuitarStringsFilter = (state) => state[StoreNameSpace.PAGE].guitarStringsFilter;
+const getBasketAction = (state) => state[StoreNameSpace.PAGE].basketAction;
 
 const getCurrentProducts = createSelector([
   getProducts,
@@ -47,23 +50,37 @@ const getCurrentProducts = createSelector([
     (guitarStringsFilter.length ? guitarStringsFilter.includes(strings) : true))
     .sort(getSortFunction(currentSortType, currentSortDirection)));
 
-export const getProductsForPage = createSelector([
+export const getProductsForCatalog = createSelector([
   getCurrentProducts,
   getCurrentPageNumber,
 ], (currentProducts, currentPageNumber) => {
-  const sliceToIndex = currentPageNumber * MAX_PRODUCTS_QUANTITY_IN_PAGE;
-  const sliceFromIndex = sliceToIndex - MAX_PRODUCTS_QUANTITY_IN_PAGE;
-  const productsForPage = currentProducts.slice(sliceFromIndex, sliceToIndex);
+  const sliceToIndex = currentPageNumber * PRODUCTS_ON_PAGE_MAX_QUANTITY;
+  const sliceFromIndex = sliceToIndex - PRODUCTS_ON_PAGE_MAX_QUANTITY;
+  const productsForCatalog = currentProducts.slice(sliceFromIndex, sliceToIndex).map(({
+    id,
+    name,
+    type,
+    popularity,
+    price,
+    rating,
+  }) => ({
+    id,
+    name,
+    type,
+    popularity,
+    price,
+    rating,
+  }));
 
   return {
-    productsForPage,
+    productsForCatalog,
   };
 });
 
 export const getMaxPageNumber = createSelector([
   getCurrentProducts,
 ], (products) => ({
-  maxPageNumber: Math.ceil(products.length / MAX_PRODUCTS_QUANTITY_IN_PAGE),
+  maxPageNumber: Math.ceil(products.length / PRODUCTS_ON_PAGE_MAX_QUANTITY),
 }));
 
 export const getPriceRange = createSelector([
@@ -106,5 +123,47 @@ export const getStringsFilterParameters = createSelector([
 
   return {
     stringsFilterParameters,
+  };
+});
+
+export const getBasketActionProduct = createSelector([
+  getProducts,
+  getBasketAction,
+], (products, basketAction) => {
+  const {
+    id,
+    article,
+    name,
+    type,
+    strings,
+    price,
+  } = products.find((item) => item.id === basketAction.productID);
+
+  return {
+    basketActionProduct: {
+      id,
+      article,
+      name,
+      type,
+      strings,
+      price,
+    },
+  };
+});
+
+export const getTotalPrice = createSelector([
+  getProductsInBasket,
+  getPromoCode,
+], (productsInBasket, promoCode) => {
+  let totalPrice = productsInBasket.length ?
+    productsInBasket.map((item) => item.price * item.quantity).reduce((a, b) => a + b) :
+    0;
+
+  if (promoCode) {
+    totalPrice = PromoCodeAction[promoCode](totalPrice);
+  }
+
+  return {
+    totalPrice,
   };
 });

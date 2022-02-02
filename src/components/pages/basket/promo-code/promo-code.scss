@@ -19,11 +19,12 @@
   display: block;
   padding-left: 1px;
   width: fit-content;
+  padding-bottom: 19px;
+  cursor: pointer;
 }
 
 .promo-code__content-wrapper {
   width: 403px;
-  margin-top: 19px;
   display: flex;
   justify-content: space-between;
 }
@@ -45,4 +46,20 @@
   padding: 0;
   padding-left: 7px;
   letter-spacing: 0.07em;
+  cursor: pointer;
+}
+
+.promo-code__invalid {
+  position: relative;
+
+  &::after {
+    content: "Промокод не действителен";
+    position: absolute;
+    top: -16px;
+    left: 1px;
+    color: $error-message;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    z-index: -1;
+  }
 }

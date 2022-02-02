@@ -12,6 +12,7 @@
   &:hover,
   &:focus {
     outline: auto;
+    outline-color: $general-black;
   }
 
   &:active {

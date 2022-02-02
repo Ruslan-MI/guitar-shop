@@ -6,7 +6,7 @@ import {
 
 import {
   changeGuitarTypeFilter,
-} from "../../../../../store/actions/catalog";
+} from "../../../../../store/actions/page";
 import {
   getGuitarTypeFilterParameters,
 } from "../../../../../store/selectors";

@@ -7,12 +7,12 @@ import {
 } from "./data";
 import {
   reducer as catalogReducer,
-} from "./catalog";
+} from "./page";
 import {
   StoreNameSpace,
 } from "../../const";
 
 export const rootReducer = combineReducers({
   [StoreNameSpace.DATA]: dataReducer,
-  [StoreNameSpace.CATALOG]: catalogReducer,
+  [StoreNameSpace.PAGE]: catalogReducer,
 });

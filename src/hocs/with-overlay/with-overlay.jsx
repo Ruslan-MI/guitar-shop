@@ -21,11 +21,9 @@ const withOverlay = (Component) => {
     };
 
     useEffect(() => {
-      document.body.style.position = `fixed`;
       document.body.style.overflow = `hidden`;
 
       return () => {
-        document.body.style.position = ``;
         document.body.style.overflow = ``;
       };
     });

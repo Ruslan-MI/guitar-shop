@@ -6,7 +6,7 @@ import {
 
 import {
   changeStringsFilter,
-} from "../../../../../store/actions/catalog";
+} from "../../../../../store/actions/page";
 import {
   getStringsFilterParameters,
 } from "../../../../../store/selectors";

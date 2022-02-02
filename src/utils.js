@@ -1,4 +1,5 @@
 import {
+  PromoCode,
   SortDirection,
   StringsInGuitarType,
 } from "./const";
@@ -45,7 +46,7 @@ export const getSortFunction = (sortType, sortDirection) => {
 export const removeNonDigits = (value) => value.replace(/\D/g, ``);
 
 export const getValueInRange = (value, minValue, maxValue) => {
-  if (!value) {
+  if (value === null) {
     return null;
   }
 
@@ -64,3 +65,5 @@ export const filterStrings = (stringsArr, typesArr) =>
   stringsArr.filter((stringsItem) =>
     typesArr.some((typesItem) =>
       StringsInGuitarType[typesItem].includes(stringsItem)));
+
+export const checkPromoCode = (promoCode) => Object.values(PromoCode).includes(promoCode);
