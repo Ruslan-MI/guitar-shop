@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useEffect,
+} from "react";
 import {
   useSelector,
   useDispatch,
@@ -16,15 +18,18 @@ import BasketNotificationModal from "../../basket-notification-modal/basket-noti
 
 import {
   BasketActionType,
+  CATALOG_PAGE_MIN_NUMBER,
   StoreNameSpace,
 } from "../../../const";
 import {
   changeBasketAction,
+  changeCatalogPage,
 } from "../../../store/actions/page";
 import {
   hideBasketNotificationModal,
 } from "../../../store/actions/data";
 import {
+  getMaxPageNumber,
   getProductsForCatalog,
 } from "../../../store/selectors";
 
@@ -43,12 +48,15 @@ const Catalog = () => {
     basketAction: {
       type: basketActionType,
     },
+    currentPageNumber,
     isShowBasketNotificationModal,
     productsForCatalog,
+    maxPageNumber,
   } = useSelector((globalState) => ({
     ...globalState[StoreNameSpace.PAGE],
     ...globalState[StoreNameSpace.DATA],
     ...getProductsForCatalog(globalState),
+    ...getMaxPageNumber(globalState),
   }));
 
   const isAddToBasket = basketActionType === BasketActionType.ADD;
@@ -62,6 +70,10 @@ const Catalog = () => {
   const handleBasketNotificationModalClose = () => {
     dispatch(hideBasketNotificationModal());
   };
+
+  useEffect(() =>
+    currentPageNumber > maxPageNumber &&
+    dispatch(changeCatalogPage(CATALOG_PAGE_MIN_NUMBER)));
 
   return (
     <div className="page page--catalog">

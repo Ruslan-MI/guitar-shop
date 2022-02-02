@@ -310,7 +310,7 @@ const mockGuitars = [
 
 export const getMockGuitars = () => [
   ...mockGuitars,
-  ...mockGuitars,
+  // ...mockGuitars,
 ].map((item) => ({
   ...item,
   rating: Math.round(Math.random() * (MAX_RATING / RATING_STEP)) * RATING_STEP,

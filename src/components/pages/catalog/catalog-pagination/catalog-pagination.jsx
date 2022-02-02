@@ -1,6 +1,4 @@
-import React, {
-  useEffect,
-} from "react";
+import React from "react";
 import {
   useDispatch,
   useSelector,
@@ -52,10 +50,6 @@ const CatalogPagination = () => {
       dispatch(changeCatalogPage(Number(evt.target.dataset.number)));
     }
   };
-
-  useEffect(() =>
-    currentPageNumber > maxPageNumber &&
-    dispatch(changeCatalogPage(CATALOG_PAGE_MIN_NUMBER)));
 
   return (
     <section className="catalog__pagination catalog-pagination">
