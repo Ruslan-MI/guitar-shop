@@ -25,7 +25,7 @@ const Breadcrumbs = ({
               )}
             </>
           ) : (
-            <a className="breadcrumbs__link" title="Вы находитесь на этой странице">{text}</a>
+            <span className="breadcrumbs__link" title="Вы находитесь на этой странице">{text}</span>
           )}
         </li>
       ))}
