@@ -5,7 +5,7 @@ import {
 } from "react-redux";
 
 import {
-  CATALOG_PAGE_CHANGE_STEP,
+  INCREMENT_STEP,
   CATALOG_PAGE_MIN_NUMBER,
   StoreNameSpace,
 } from "../../../../const";
@@ -25,10 +25,10 @@ const CatalogPagination = () => {
     ...getMaxPageNumber(globalState),
   }));
 
-  const secondPageNumber = CATALOG_PAGE_MIN_NUMBER + CATALOG_PAGE_CHANGE_STEP;
-  const penultimatePageNumber = maxPageNumber - CATALOG_PAGE_CHANGE_STEP;
-  const previousPageNumber = currentPageNumber - CATALOG_PAGE_CHANGE_STEP;
-  const nextPageNumber = currentPageNumber + CATALOG_PAGE_CHANGE_STEP;
+  const secondPageNumber = CATALOG_PAGE_MIN_NUMBER + INCREMENT_STEP;
+  const penultimatePageNumber = maxPageNumber - INCREMENT_STEP;
+  const previousPageNumber = currentPageNumber - INCREMENT_STEP;
+  const nextPageNumber = currentPageNumber + INCREMENT_STEP;
 
   const isShowFirstPageLink = currentPageNumber > CATALOG_PAGE_MIN_NUMBER;
   const isShowLeftPlug = currentPageNumber > secondPageNumber &&

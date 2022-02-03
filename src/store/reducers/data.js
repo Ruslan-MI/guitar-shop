@@ -13,8 +13,8 @@ import {
   getMockGuitars,
 } from "../../mocks";
 import {
-  PRODUCT_QUANTITY_CHANGE_STEP,
-  PRODUCT_QUANTITY_MIN_VALUE,
+  INCREMENT_STEP,
+  ProductQuantityValue,
 } from "../../const";
 
 const initialState = {
@@ -37,7 +37,7 @@ export const reducer = createReducer(initialState, (builder) => {
         ...state.productsInBasket,
         {
           ...product,
-          quantity: PRODUCT_QUANTITY_MIN_VALUE,
+          quantity: ProductQuantityValue.MIN,
         },
       ];
     } else {
@@ -47,7 +47,7 @@ export const reducer = createReducer(initialState, (builder) => {
         ...state.productsInBasket.slice(0, indexInBasket),
         {
           ...product,
-          quantity: product.quantity + PRODUCT_QUANTITY_CHANGE_STEP,
+          quantity: product.quantity + INCREMENT_STEP,
         },
         ...state.productsInBasket.slice(indexInBasket + 1),
       ];

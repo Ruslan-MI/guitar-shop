@@ -1,5 +1,6 @@
 import {
   PromoCode,
+  PromoCodeParameter,
   SortDirection,
   StringsInGuitarType,
 } from "./const";
@@ -67,3 +68,45 @@ export const filterStrings = (stringsArr, typesArr) =>
       StringsInGuitarType[typesItem].includes(stringsItem)));
 
 export const checkPromoCode = (promoCode) => Object.values(PromoCode).includes(promoCode);
+
+export const getDiscount = (price, promoCode) => {
+  let discountedPrice;
+
+  switch (promoCode) {
+    case PromoCode.GITARAHIT:
+      const {
+        DISCOUNT_IN_PROPORTION,
+      } = PromoCodeParameter[PromoCode.GITARAHIT];
+
+      discountedPrice = price - Math.floor(price * DISCOUNT_IN_PROPORTION);
+
+      break;
+    case PromoCode.SUPERGITARA:
+      const {
+        DISCOUNT_IN_RUBLE,
+      } = PromoCodeParameter[PromoCode.SUPERGITARA];
+
+      discountedPrice = price > DISCOUNT_IN_RUBLE ?
+        price - DISCOUNT_IN_RUBLE :
+        0;
+
+      break;
+    case PromoCode.GITARA2020:
+      const {
+        DISCOUNT_IN_PROPORTION_MAX_VALUE,
+        DISCOUNT_IN_RUBLE: DISCOUNT_IN_RUBL,
+      } = PromoCodeParameter[PromoCode.GITARA2020];
+
+      const discountInRubleMaxValue = Math.floor(price * DISCOUNT_IN_PROPORTION_MAX_VALUE);
+
+      discountedPrice = price - Math.min(DISCOUNT_IN_RUBL, discountInRubleMaxValue);
+
+      break;
+    default:
+      discountedPrice = price;
+
+      break;
+  }
+
+  return discountedPrice;
+};

@@ -6,7 +6,7 @@ import {
   reducer as dataReducer,
 } from "./data";
 import {
-  reducer as catalogReducer,
+  reducer as pageReducer,
 } from "./page";
 import {
   StoreNameSpace,
@@ -14,5 +14,5 @@ import {
 
 export const rootReducer = combineReducers({
   [StoreNameSpace.DATA]: dataReducer,
-  [StoreNameSpace.PAGE]: catalogReducer,
+  [StoreNameSpace.PAGE]: pageReducer,
 });

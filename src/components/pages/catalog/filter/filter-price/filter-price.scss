@@ -50,11 +50,18 @@
   background-color: transparent;
 
   &::placeholder {
-    opacity: 0.7;
+    opacity: 0.5;
+    color: $general-black;
+  }
+
+  &:hover {
+    border-color: $price-dash;
   }
 
   &:focus {
+    outline: none;
     color: inherit;
+    border-color: $price-dash;
     background-color: $general-white;
   }
 

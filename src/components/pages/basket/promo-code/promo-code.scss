@@ -37,6 +37,12 @@
   text-align: center;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    border-color: $price-dash;
+  }
 }
 
 .promo-code__form-submit-button {

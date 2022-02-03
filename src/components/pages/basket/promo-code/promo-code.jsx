@@ -6,6 +6,9 @@ import {
 } from "react-redux";
 
 import {
+  PROMO_CODE_MAX_LENGTH,
+} from "../../../../const";
+import {
   setPromoCode,
 } from "../../../../store/actions/data";
 import {
@@ -42,7 +45,7 @@ const PromoCode = () => {
         <label className="promo-code__label" htmlFor="promo-code">Введите свой промокод, если он у вас есть.</label>
         <span className="promo-code__content-wrapper">
           <input className="promo-code__input" type="text" name="promo-code" id="promo-code" defaultValue="GITARAHIT"
-            ref={promoCodeInputRef} />
+            maxLength={PROMO_CODE_MAX_LENGTH} ref={promoCodeInputRef} />
           <button className="promo-code__form-submit-button grey-button" type="submit">Применить купон</button>
         </span>
       </p>

@@ -19,10 +19,13 @@ const CatalogCard = ({
   product: {
     id,
     name,
-    type,
     popularity,
     price,
     rating,
+    image: {
+      href: imageHref,
+      description: imageDescription,
+    },
   },
 }) => {
   const dispatch = useDispatch();
@@ -51,7 +54,8 @@ const CatalogCard = ({
         <p className="catalog-card__popularity">{popularity}</p>
       </div>
       <div className="catalog-card__content-wrapper catalog-card__content-wrapper--image">
-        <img className="catalog-card__image" src={`img/catalog/${type}.png`} alt="Изображение товара" width="68" height="190" />
+        <img className="catalog-card__image" width="68" height="190"
+          src={imageHref} alt={imageDescription} />
       </div>
       <ul className="catalog-card__links-list">
         <li className="catalog-card__links-item">
@@ -69,10 +73,13 @@ CatalogCard.propTypes = {
   product: PropTypes.exact({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
     popularity: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+    image: PropTypes.exact({
+      href: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

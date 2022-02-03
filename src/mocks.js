@@ -310,9 +310,13 @@ const mockGuitars = [
 
 export const getMockGuitars = () => [
   ...mockGuitars,
-  // ...mockGuitars,
 ].map((item) => ({
   ...item,
   rating: Math.round(Math.random() * (MAX_RATING / RATING_STEP)) * RATING_STEP,
   id: nanoid(),
+  image: {
+    forCatalog: `img/catalog/${item.type}.png`,
+    forBasket: `img/basket/${item.type}.png`,
+    description: `Изображение товара`,
+  },
 }));

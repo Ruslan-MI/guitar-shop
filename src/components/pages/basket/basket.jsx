@@ -12,6 +12,7 @@ import Footer from "../../footer/footer";
 import BasketActionModal from "../../basket-action-modal/basket-action-modal";
 
 import {
+  AppRoute,
   BasketActionType,
   StoreNameSpace,
 } from "../../../const";
@@ -32,7 +33,7 @@ const breadcrumbsLinks = [
   },
   {
     text: `Каталог`,
-    href: `#`,
+    href: AppRoute.ROOT,
   },
   {
     text: `Оформляем`,
@@ -65,7 +66,7 @@ const Basket = () => {
       <Header />
       <main className="page__main main basket wrapper">
         <h1 className="main__heading basket__heading">Корзина</h1>
-        <Breadcrumbs className="catalog__breadcrumbs" links={breadcrumbsLinks} />
+        <Breadcrumbs className="main__breadcrumbs" links={breadcrumbsLinks} />
         {productsInBasket.length ? (
           <>
             <BasketProducts />

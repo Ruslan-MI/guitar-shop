@@ -28,6 +28,10 @@ const BasketProducts = () => {
           strings,
           price,
           quantity,
+          image: {
+            forBasket: href,
+            description,
+          },
         }) => (
           <li className="basket-products__item" key={id}>
             <BasketCard product={{
@@ -38,6 +42,10 @@ const BasketProducts = () => {
               strings,
               price,
               quantity,
+              image: {
+                href,
+                description,
+              },
             }} />
           </li>
         ))}

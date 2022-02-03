@@ -75,10 +75,10 @@
 
 .catalog-card__link {
   display: block;
-  height: 23px;
+  min-height: 23px;
   font-size: 12px;
-  letter-spacing: 0.02em;
-  padding-top: 6px;
+  letter-spacing: 0.03em;
+  padding: 6px 5px 3px;
 
   &--more {
     width: 89px;
@@ -86,7 +86,7 @@
 
   &--buy {
     width: 87px;
-    padding-left: 15px;
+    padding-left: 20px;
     background-image: url(./img/cart.svg);
     background-repeat: no-repeat;
     background-position: 11px center;

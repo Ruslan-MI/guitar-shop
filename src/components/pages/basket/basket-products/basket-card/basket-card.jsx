@@ -10,9 +10,8 @@ import {
 import {
   BasketActionType,
   guitarTypeCyrillicMap,
-  PRODUCT_QUANTITY_CHANGE_STEP,
-  PRODUCT_QUANTITY_MAX_VALUE,
-  PRODUCT_QUANTITY_MIN_VALUE,
+  INCREMENT_STEP,
+  ProductQuantityValue,
 } from "../../../../../const";
 import {
   changeBasketAction,
@@ -30,6 +29,10 @@ const BasketCard = ({
     strings,
     price,
     quantity,
+    image: {
+      href: imageHref,
+      description: imageDescription,
+    },
   },
 }) => {
   const dispatch = useDispatch();
@@ -44,7 +47,7 @@ const BasketCard = ({
   };
 
   const handleDecreaseButtonClick = () => {
-    const updatedQuantity = quantity - PRODUCT_QUANTITY_CHANGE_STEP;
+    const updatedQuantity = quantity - INCREMENT_STEP;
 
     if (updatedQuantity) {
       dispatch(changeProductQuantity({
@@ -62,9 +65,9 @@ const BasketCard = ({
   };
 
   const handleIncreaseButtonClick = () => {
-    const updatedQuantity = quantity + PRODUCT_QUANTITY_CHANGE_STEP;
+    const updatedQuantity = quantity + INCREMENT_STEP;
 
-    if (updatedQuantity.length > `${PRODUCT_QUANTITY_MAX_VALUE}`.length) {
+    if (`${updatedQuantity}`.length > `${ProductQuantityValue.MAX}`.length) {
       return;
     }
 
@@ -77,7 +80,7 @@ const BasketCard = ({
   const handleQuantityInputChange = (evt) => {
     const updatedQuantity = evt.target.value;
 
-    if (updatedQuantity.length > `${PRODUCT_QUANTITY_MAX_VALUE}`.length) {
+    if (updatedQuantity.length > `${ProductQuantityValue.MAX}`.length) {
       return;
     }
 
@@ -88,10 +91,10 @@ const BasketCard = ({
   };
 
   const handleQuantityInputBlur = () =>
-    quantity < PRODUCT_QUANTITY_MIN_VALUE &&
+    quantity < ProductQuantityValue.MIN &&
     dispatch(changeProductQuantity({
       id,
-      quantity: PRODUCT_QUANTITY_MIN_VALUE,
+      quantity: ProductQuantityValue.MIN,
     }));
 
   return (
@@ -102,7 +105,8 @@ const BasketCard = ({
         <p className="basket-card__specifications">{guitarTypeCyrillicMap[type]}, {strings} струнная</p>
       </div>
       <div className="basket-card__content-wrapper basket-card__content-wrapper--image">
-        <img className="basket-card__image" src={`img/basket/${type}.png`} alt="Изображение товара" width="48" height="124" />
+        <img className="basket-card__image" width="48" height="124"
+          src={imageHref} alt={imageDescription} />
       </div>
       <div className="basket-card__content-wrapper basket-card__content-wrapper--price-quantity-total">
         <p className="basket-card__price">{formatPrice(price)} ₽</p>
@@ -140,6 +144,10 @@ BasketCard.propTypes = {
     strings: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
+    image: PropTypes.exact({
+      href: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

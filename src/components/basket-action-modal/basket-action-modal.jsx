@@ -40,6 +40,10 @@ const BasketActionModal = ({
       type,
       strings,
       price,
+      image: {
+        href: imageHref,
+        description: imageDescription,
+      },
     },
   } = useSelector((globalState) => ({
     ...globalState[StoreNameSpace.PAGE],
@@ -123,7 +127,8 @@ const BasketActionModal = ({
           <li className="basket-action-modal__product-info-item basket-action-modal__product-info-item--price">Цена: {formatPrice(price)} ₽</li>
         </ul>
         <div className="basket-action-modal__image-wrapper">
-          <img className="basket-action-modal__image" src={`img/basket/${type}.png`} alt="Изображение товара" width="48" height="124" />
+          <img className="basket-action-modal__image" width="48" height="124"
+            src={imageHref} alt={imageDescription} />
         </div>
         <ul className="basket-action-modal__links-list">
           {isRemoveProduct ? (

@@ -5,12 +5,12 @@ import {
 import {
   GuitarType,
   PRODUCTS_ON_PAGE_MAX_QUANTITY,
-  PromoCodeAction,
   StoreNameSpace,
   StringsInGuitarType,
 } from "../const";
 import {
   filterStrings,
+  getDiscount,
   getSortFunction,
   getValueInRange,
 } from "../utils";
@@ -59,17 +59,23 @@ export const getProductsForCatalog = createSelector([
   const productsForCatalog = currentProducts.slice(sliceFromIndex, sliceToIndex).map(({
     id,
     name,
-    type,
     popularity,
     price,
     rating,
+    image: {
+      forCatalog: href,
+      description,
+    },
   }) => ({
     id,
     name,
-    type,
     popularity,
     price,
     rating,
+    image: {
+      href,
+      description,
+    },
   }));
 
   return {
@@ -137,6 +143,10 @@ export const getBasketActionProduct = createSelector([
     type,
     strings,
     price,
+    image: {
+      forBasket: href,
+      description,
+    },
   } = products.find((item) => item.id === basketAction.productID);
 
   return {
@@ -147,6 +157,10 @@ export const getBasketActionProduct = createSelector([
       type,
       strings,
       price,
+      image: {
+        href,
+        description,
+      },
     },
   };
 });
@@ -160,7 +174,7 @@ export const getTotalPrice = createSelector([
     0;
 
   if (promoCode) {
-    totalPrice = PromoCodeAction[promoCode](totalPrice);
+    totalPrice = getDiscount(totalPrice, promoCode);
   }
 
   return {

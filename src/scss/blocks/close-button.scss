@@ -1,6 +1,6 @@
 .close-button {
   padding: 0;
-  border: none;
+  border: 1px solid transparent;
   width: 18px;
   height: 18px;
   background-color: transparent;
@@ -11,8 +11,7 @@
 
   &:hover,
   &:focus {
-    outline: auto;
-    outline-color: $general-black;
+    border-color: $input-border;
   }
 
   &:active {

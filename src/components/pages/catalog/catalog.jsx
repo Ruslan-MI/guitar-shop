@@ -80,7 +80,7 @@ const Catalog = () => {
       <Header />
       <main className="page__main main catalog wrapper">
         <h1 className="main__heading catalog__heading">Каталог гитар</h1>
-        <Breadcrumbs className="catalog__breadcrumbs" links={breadcrumbsLinks} />
+        <Breadcrumbs className="main__breadcrumbs" links={breadcrumbsLinks} />
         <div className="catalog__wrapper">
           <Filter />
           <div className="catalog__main-column-wrapper">

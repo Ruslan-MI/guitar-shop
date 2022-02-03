@@ -1,4 +1,7 @@
 import React from "react";
+import {
+  Link,
+} from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Breadcrumbs = ({
@@ -13,9 +16,17 @@ const Breadcrumbs = ({
         href,
       }) => (
         <li key={text} className="breadcrumbs__item">
-          {href ?
-            <a className="breadcrumbs__link" href={href}>{text}</a> :
-            <a className="breadcrumbs__link" title="Вы находитесь на этой странице">{text}</a>}
+          {href ? (
+            <>
+              {href === `#` ? (
+                <a className="breadcrumbs__link" href={href}>{text}</a>
+              ) : (
+                <Link className="breadcrumbs__link" to={href}>{text}</Link>
+              )}
+            </>
+          ) : (
+            <a className="breadcrumbs__link" title="Вы находитесь на этой странице">{text}</a>
+          )}
         </li>
       ))}
     </ul>
