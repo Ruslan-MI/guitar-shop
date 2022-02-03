@@ -24,17 +24,22 @@ const PromoCode = () => {
     evt.preventDefault();
 
     const promoCode = promoCodeInputRef.current.value.trim();
-    const parentClassList = promoCodeInputRef.current.parentElement.classList;
+
+    promoCodeInputRef.current.value = ``;
+
+    if (!promoCode.length) {
+      return;
+    }
+
+    const inputParentClassList = promoCodeInputRef.current.parentElement.classList;
 
     if (checkPromoCode(promoCode)) {
-      parentClassList.remove(`promo-code__invalid`);
+      inputParentClassList.remove(`promo-code__invalid`);
 
       dispatch(setPromoCode(promoCode));
     } else {
-      parentClassList.add(`promo-code__invalid`);
+      inputParentClassList.add(`promo-code__invalid`);
     }
-
-    promoCodeInputRef.current.value = ``;
   };
 
   return (
