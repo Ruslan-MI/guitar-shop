@@ -23,8 +23,8 @@ import {
 
 const initialState = {
   currentPageNumber: CATALOG_PAGE_MIN_NUMBER,
-  currentSortType: SortType.NONE,
-  currentSortDirection: SortDirection.NONE,
+  currentSortType: null,
+  currentSortDirection: null,
   minPriceFilter: null,
   maxPriceFilter: null,
   guitarTypeFilter: [],
@@ -43,7 +43,7 @@ export const reducer = createReducer(initialState, (builder) => {
   builder.addCase(changeSortType, (state, action) => {
     state.currentSortType = action.payload;
 
-    if (state.currentSortDirection === SortDirection.NONE) {
+    if (!state.currentSortDirection) {
       state.currentSortDirection = SortDirection.ASCENDING;
     }
   });
@@ -51,7 +51,7 @@ export const reducer = createReducer(initialState, (builder) => {
   builder.addCase(changeSortDirection, (state, action) => {
     state.currentSortDirection = action.payload;
 
-    if (state.currentSortType === SortType.NONE) {
+    if (!state.currentSortType) {
       state.currentSortType = SortType.PRICE;
     }
   });

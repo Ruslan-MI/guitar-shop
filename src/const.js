@@ -27,13 +27,11 @@ export const StoreNameSpace = {
 export const SortType = {
   PRICE: `price`,
   POPULARITY: `popularity`,
-  NONE: `none`,
 };
 
 export const SortDirection = {
   ASCENDING: `ascending`,
   DESCENDING: `descending`,
-  NONE: `none`,
 };
 
 export const GuitarType = {

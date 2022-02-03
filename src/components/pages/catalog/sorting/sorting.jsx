@@ -47,7 +47,7 @@ const Sorting = () => {
       <h2 className="sorting__heading">Сортировать:</h2>
       <fieldset className="sorting__fieldset">
         <ul className="sorting__list sorting__list--type">
-          {Object.values(SortType).filter((item) => item !== SortType.NONE).map((item) => (
+          {Object.values(SortType).map((item) => (
             <li key={item} className="sorting__item sorting__item--type">
               <input className="sorting__radio-input visually-hidden" type="radio" name="sort-type"
                 id={item} value={item} checked={item === currentSortType} onChange={handleSortingTypeInputChange} />
@@ -56,7 +56,7 @@ const Sorting = () => {
           ))}
         </ul>
         <ul className="sorting__list sorting__list--direction">
-          {Object.values(SortDirection).filter((item) => item !== SortDirection.NONE).map((item) => (
+          {Object.values(SortDirection).map((item) => (
             <li key={item} className="sorting__item sorting__item--direction">
               <input className="sorting__radio-input visually-hidden" type="radio" name="sort-direction"
                 id={item} value={item} checked={item === currentSortDirection} onChange={handleSortingDirectionInputChange} />

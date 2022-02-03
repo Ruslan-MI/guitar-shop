@@ -23,7 +23,7 @@ const PromoCode = () => {
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
 
-    const promoCode = promoCodeInputRef.current.value.trim();
+    const promoCode = promoCodeInputRef.current.value.trim().toUpperCase();
 
     promoCodeInputRef.current.value = ``;
 
